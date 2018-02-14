@@ -3942,7 +3942,8 @@ AqlValue Functions::Assert(arangodb::aql::Query* query, transaction::Methods* tr
   auto const expr = ExtractFunctionParameterValue(parameters, 0);
   auto const message = ExtractFunctionParameterValue(parameters, 1);
   if(!message.isString()){
-    RegisterWarning(query, "ASSERT", TRI_ERROR_QUERY_FUNCTION_ARGUMENT_TYPE_MISMATCH);
+    RegisterInvalidArgumentWarning(query, "ASSERT");
+    return AqlValue(AqlValueHintNull());
   }
   if(!expr.toBoolean()){
     std::string msg = message.slice().copyString();
@@ -3959,7 +3960,8 @@ AqlValue Functions::Warn(arangodb::aql::Query* query, transaction::Methods* trx,
   auto const expr = ExtractFunctionParameterValue(parameters, 0);
   auto const message = ExtractFunctionParameterValue(parameters, 1);
   if(!message.isString()){
-    RegisterWarning(query, "WARN", TRI_ERROR_QUERY_FUNCTION_ARGUMENT_TYPE_MISMATCH);
+    RegisterInvalidArgumentWarning(query, "WARN");
+    return AqlValue(AqlValueHintNull());
   }
   if(!expr.toBoolean()){
     std::string msg = message.slice().copyString();
