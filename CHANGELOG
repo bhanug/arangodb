@@ -1,6 +1,8 @@
 devel
 -----
 
+* fix issue #4583 - add AQL ASSERT and AQL WARN
+
 * renamed startup option `--replication.automatic-failover` to 
   `--replication.active-failover`
   using the old option name will still work in ArangoDB 3.4, but the old option
